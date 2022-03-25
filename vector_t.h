@@ -19,58 +19,59 @@
 
 template<class T> class vector_t {
  public:
-  // constructores
+  /// Constructors
   vector_t(const int = 0);
   vector_t(const vector_t&); // constructor de copia
-
-  // operador de asignación
+  /// Assignation operator
   vector_t<T>& operator=(const vector_t<T>&);
-
-  // destructor
+  /// Destructor
   ~vector_t();
-  
-  // getters
+  /// Getters
   T get_val(const int) const;
   int get_size(void) const;
-  
-  // setters
+  /// Setters
   void set_val(const int, const T);
-  
-  // getters-setters
+  /// Getters-Setters
   T& at(const int);
   T& operator[](const int);
-  
-  // getters constantes
+  /// Getters constantes
   const T& at(const int) const;
   const T& operator[](const int) const;
-
-  // Redimensionado
+  /// Resize
   void resize(const int);
-  
-  // E/S
+  /// Input / Output
   void read(std::istream& = std::cin);
   void write(std::ostream& = std::cout) const;
 
  private:
-  T *v_;
-  int sz_;
+  T* v_;
+  int size_;
   
   void build(void);
   void destroy(void);
 };
 
-
-template<class T> vector_t<T>::vector_t(const int n) : v_(NULL), sz_(n) {
+/**
+ * @brief It is the constructor of the class with params.
+ * @param n: the size of the vector. 
+ */
+template<class T> vector_t<T>::vector_t(const int n) : v_(NULL), size_(n) {
   build();
 }
 
-// constructor de copia
+/**
+ * @brief Copy constructor
+ * @param w: the vector. 
+ */
 template<class T> vector_t<T>::vector_t(const vector_t<T>& w)
-    : v_(NULL), sz_(0) {
+    : v_(NULL), size_(0) {
   *this = w; // se invoca directamente al operator=
 }
 
-// operador de asignación
+/**
+ * @brief Assignation operator 
+ * @param n: It is the vector that will be assigned to another one. 
+ */
 template<class T> vector_t<T>& vector_t<T>::operator=(const vector_t<T>& w) {
   resize(w.get_size());
   for (int i = 0; i < get_size(); i++)
@@ -79,83 +80,183 @@ template<class T> vector_t<T>& vector_t<T>::operator=(const vector_t<T>& w) {
   return *this;
 }
 
-template<class T> vector_t<T>::~vector_t() {
+
+/**
+ * @brief It is the destructor of the class
+ */
+template<class T> 
+vector_t<T>::~vector_t() {
   destroy();
 }
 
-template<class T> void vector_t<T>::build() {
+
+/**
+ * @brief This method is used by the constructors. 
+ */
+template<class T> 
+void vector_t<T>::build() {
   v_ = NULL;
-  if (sz_ != 0) {
-    v_ = new T[sz_];
+  if (size_ != 0) {
+    v_ = new T[size_];
     assert(v_ != NULL);
   }
 }
 
-template<class T> void vector_t<T>::destroy() {
+
+
+/**
+ * @brief This method is used by the destructor. 
+ */
+template<class T> 
+void vector_t<T>::destroy() {
   if (v_ != NULL) {
     delete[] v_;
     v_ = NULL;
   }
-  sz_ = 0;
+  size_ = 0;
 }
 
-template<class T> void vector_t<T>::resize(const int n) {
+
+/**
+ * @brief This mehod set the size of the vector. 
+ * @param n : The size that will be assigned.
+ */
+template<class T> 
+void vector_t<T>::resize(const int n) {
   destroy();
-  sz_ = n;
+  size_ = n;
   build();
 }
 
-template<class T> inline T vector_t<T>::get_val(const int i) const {
+
+
+
+/**
+ * @brief Getter of the value.
+ * @param i : It is the position.
+ */
+template<class T> 
+inline T vector_t<T>::get_val(const int i) const {
   assert(i >= 0 && i < get_size());
   return v_[i];
 }
 
-template<class T> inline int vector_t<T>::get_size() const {
-  return sz_;
+
+
+/**
+ * @brief Getter of the size of the vector.
+ */
+template<class T> 
+inline int vector_t<T>::get_size() const {
+  return size_;
 }
 
-template<class T> void vector_t<T>::set_val(const int i, const T d) {
+
+
+/**
+ * @brief Setter of the value.
+ * @param i : It is the position.
+ * @param d : value that will be assigned.
+ */
+template<class T> 
+void vector_t<T>::set_val(const int i, const T d) {
   assert(i >= 0 && i < get_size());
   v_[i] = d;
 }
 
-template<class T> T& vector_t<T>::at(const int i) {
+
+
+/**
+ * @brief This method allow user to know the element of a vector in a specific position.
+ * @param i : It is the position.
+ */
+template<class T> 
+T& vector_t<T>::at(const int i) {
   assert(i >= 0 && i < get_size());
   return v_[i];
 }
 
-template<class T> T& vector_t<T>::operator[](const int i) {
+
+
+/**
+ * @brief Operator [] overload
+ * @param i : It is the position.
+ */
+template<class T> 
+T& vector_t<T>::operator[](const int i) {
   return at(i);
 }
 
-template<class T> const T& vector_t<T>::at(const int i) const {
+
+
+/**
+ * @brief This method allow user to know the element of a vector in a specific position. Const
+ * @param i : It is the position.
+ */
+template<class T> 
+const T& vector_t<T>::at(const int i) const {
   assert(i >= 0 && i < get_size());
   return v_[i];
 }
 
-template<class T> const T& vector_t<T>::operator[](const int i) const {
+
+
+/**
+ * @brief This method allow user to know the element of a vector in a specific position. Const
+ * @param i : It is the position.
+ */
+template<class T> 
+const T& vector_t<T>::operator[](const int i) const {
   return at(i);
 }
 
-template<class T> void vector_t<T>::read(std::istream& is) {
-  is >> sz_;
-  resize(sz_);
-  for (int i = 0; i < sz_; i++)
+
+
+/**
+ * @brief This method allow user to introduce a Vector
+ * @param is : Input stream.
+ */
+template<class T> 
+void vector_t<T>::read(std::istream& is) {
+  is >> size_;
+  resize(size_);
+  for (int i = 0; i < size_; i++)
     is >> at(i);
 }
 
-template<class T> void vector_t<T>::write(std::ostream& os) const {
+
+
+/**
+ * @brief This method allow user to print a vector on the screen.
+ * @param os : Output stream.
+ */
+template<class T> 
+void vector_t<T>::write(std::ostream& os) const {
   os << get_size() << ": [ ";
   for (int i = 0; i < get_size(); i++)
     os << at(i) << (i != get_size() - 1 ? "\t" : "");
   os << " ]" << std::endl;
 }
 
+
+
+/**
+ * @brief Operator >> overcharge
+ * @param is : Input stream.
+ * @param v : The vector that will be inserted.
+ */
 template<class T> std::istream& operator>>(std::istream& is, vector_t<T>& v) {
   v.read(is);
   return is;
 }
 
+
+
+/**
+ * @brief Operator << overcharge
+ * @param is : Output stream.
+ * @param v : The vector that will be printed.
+ */
 template<class T> std::ostream& operator<<(std::ostream& os,
 					   const vector_t<T>& v) {
   v.write(os);

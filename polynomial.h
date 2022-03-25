@@ -22,44 +22,41 @@
 // Clase para polinomios basados en vectores densos de doubles
 class Polynomial : public vector_t<double> {
  public:
-  // constructores
+  /// Constructors
   Polynomial(const int n = 0) : vector_t<double>(n) {};
-  Polynomial(const Polynomial& pol)
-      : vector_t<double>(pol) {}; // constructor de copia
-
-  // destructor
+  Polynomial(const Polynomial& pol): vector_t<double>(pol) {}; // constructor de copia
+  /// Destructors
   ~Polynomial() {};
-
-  // E/S
-  void Write(std::ostream& = std::cout, const double eps = EPS) const;
-  
-  // operaciones
+  /// Input / Output 
+  void Write(std::ostream& = std::cout, const double eps = kEps) const;
+  /// Operations
   double Eval(const double) const;
-  bool IsEqual(const Polynomial&, const double = EPS) const;
+  bool IsEqual(const Polynomial&, const double = kEps) const;
  };
 
 
 // Clase para polinomios basados en vectores dispersos
 class SparsePolynomial : public sparse_vector_t {
  public:
-  // constructores
+  /// Constructors
   SparsePolynomial(const int n = 0) : sparse_vector_t(n) {};
   SparsePolynomial(const Polynomial& pol) : sparse_vector_t(pol) {};
   SparsePolynomial(const SparsePolynomial&);  // constructor de copia
-
-  // destructor
+  /// Destructors
   ~SparsePolynomial() {};
-
-  // E/S
+  /// Input / Output
   void Write(std::ostream& = std::cout) const;
-  
-  // operaciones
+  /// Operations
   double Eval(const double) const;
-  bool IsEqual(const SparsePolynomial&, const double = EPS) const;
-  bool IsEqual(const Polynomial&, const double = EPS) const;
+  bool IsEqual(const SparsePolynomial&, const double = kEps) const;
+  bool IsEqual(const Polynomial&, const double = kEps) const;
 };
 
-// E/S
+/**
+ * @brief This method allow user to print a polynomial on the screen.
+ * @param os : Output stream.
+ * @param eps : The presition.
+ */
 void Polynomial::Write(std::ostream& os, const double eps) const {
   os << get_size() << ": [ ";
   bool first{true};
@@ -74,14 +71,26 @@ void Polynomial::Write(std::ostream& os, const double eps) const {
   os << " ]" << std::endl;
 }
 
+
+
+
+/**
+ * @brief Operator overcharge <<
+ * @param os : Output stream.
+ * @param p : The polynomial that will be printed.
+ */
 std::ostream& operator<<(std::ostream& os, const Polynomial& p) {
   p.Write(os);
   return os;
 }
 
-// Operaciones con polinomios
+// Operations
 
-// Evaluación de un polinomio representado por vector denso
+/**
+ * @brief Evaluation of a polynomial represented for an original vector.
+ * @param x :
+ * @return result
+ */
 double Polynomial::Eval(const double x) const {
   double result{0.0};
   // poner el código aquí
@@ -89,18 +98,33 @@ double Polynomial::Eval(const double x) const {
 }
 
 // Comparación si son iguales dos polinomios representados por vectores densos
+/**
+ * @brief This method allow user to know if two vectors are equals
+ * @param pol : It is one of the polynomials.
+ * @param eps : It is the presition.
+ * @return true 
+ * @return false 
+ */
 bool Polynomial::IsEqual(const Polynomial& pol, const double eps) const {
   bool differents = false;
   // poner el código aquí
   return !differents;
 }
 
-// constructor de copia
+/**
+ * @brief It is the copy constructor.
+ * @param spol It is the polynomial that will be passed.
+ */
 SparsePolynomial::SparsePolynomial(const SparsePolynomial& spol) {
   *this = spol;   // se invoca directamente al operator=
 }
 
-// E/S
+/// Input / Output Sparce vector
+
+/**
+ * @brief This method allow user to print a sparse vector.
+ * @param os : Output stream. 
+ */
 void SparsePolynomial::Write(std::ostream& os) const {
   os << get_n() << "(" << get_nz() << "): [ ";
   bool first{true};
@@ -115,6 +139,13 @@ void SparsePolynomial::Write(std::ostream& os) const {
   os << " ]" << std::endl;
 }
 
+
+
+/**
+ * @brief Operator << overcharge
+ * @param os : Output stream. 
+ * @param p: It is the polynomial that will be printed.
+ */
 std::ostream& operator<<(std::ostream& os, const SparsePolynomial& p) {
   p.Write(os);
   return os;
@@ -123,15 +154,25 @@ std::ostream& operator<<(std::ostream& os, const SparsePolynomial& p) {
 // Operaciones con polinomios
 
 // Evaluación de un polinomio representado por vector disperso
+/**
+ * @brief Evaluation of a polynomial represented for a sparce vector.
+ * @param x :
+ * @return result
+ */
 double SparsePolynomial::Eval(const double x) const {
   double result{0.0};
   // poner el código aquí
   return result;
 }
 
-// Comparación si son iguales dos polinomios representados por vectores dispersos
-bool SparsePolynomial::IsEqual(const SparsePolynomial& spol
-			       , const double eps) const {
+/**
+ * @brief This method allow user to know if two sparse vectors are equals
+ * @param pol : It is one of the polynomials.
+ * @param eps : It is the presition.
+ * @return true 
+ * @return false 
+ */
+bool SparsePolynomial::IsEqual(const SparsePolynomial& spol, const double eps) const {
   bool differents = false;
   // poner el código aquí
   return !differents;
@@ -139,6 +180,13 @@ bool SparsePolynomial::IsEqual(const SparsePolynomial& spol
 
 // Comparación si son iguales dos polinomios representados por
 // vector disperso y vector denso
+/**
+ * @brief This method allow user to know if two sparse vectors are equals
+ * @param pol : It is one of the polynomials.
+ * @param eps : It is the presition.
+ * @return true 
+ * @return false 
+ */
 bool SparsePolynomial::IsEqual(const Polynomial& pol, const double eps) const {
   bool differents = false;
   // poner el código aquí
