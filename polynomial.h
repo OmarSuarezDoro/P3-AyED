@@ -1,18 +1,20 @@
-// AUTOR: 
-// FECHA: 
-// EMAIL: 
-// VERSION: 1.0
-// ASIGNATURA: Algoritmos y Estructuras de Datos
-// PRÁCTICA Nº: 3
-// ESTILO: Google C++ Style Guide
-// COMENTARIOS:
-//
-
+/**
+ * AUTOR: Omar Suárez Doro
+ * FECHA: 25/03/2022
+ * EMAIL: alu0101483474@ull.edu.es
+ * VERSION: 1.0
+ * ASIGNATURA: Algoritmos y Estructuras de Datos
+ * PRÁCTICA Nº: 3
+ * COMENTARIOS: se indican entre [] las pautas de estilo aplicadas de
+ *              "C++ Programming Style Guidelines"
+ *              https://geosoft.no/development/cppstyle.html
+ * COMPILACIÓN: g++ -g rational_t.cpp main_p2.cpp -o main_p2
+ */
 #ifndef POLYNOMIAL_H_
 #define POLYNOMIAL_H_
 
 #include <iostream>
-#include <math.h>  // fabs, pow
+#include <math.h>  
 
 #include "vector_t.h"
 #include "sparse_vector_t.h"
