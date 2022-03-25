@@ -6,7 +6,7 @@
 // PRÁCTICA Nº: 3
 // ESTILO: Google C++ Style Guide
 // COMENTARIOS:
-// 
+//
 
 #ifndef POLYNOMIAL_H_
 #define POLYNOMIAL_H_
