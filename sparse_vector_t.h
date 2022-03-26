@@ -84,7 +84,6 @@ sparse_vector_t::sparse_vector_t(const int n) : pv_(n), nz_(0), n_(n) {}
  * @param v : It is the vector that will be passed
  * @param eps : It is the presition.
  */
-
 sparse_vector_t::sparse_vector_t(const vector_t<double>& v, const double eps) : pv_(), nz_(0), n_(0) {
   n_ = v.get_size();
   int size{0};
