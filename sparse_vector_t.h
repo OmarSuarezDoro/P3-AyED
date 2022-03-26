@@ -63,7 +63,7 @@ class sparse_vector_t {
  * @return true 
  * @return false 
  */
-bool sparse_vector_t::IsNotZero(const double val, const double eps = kEps) const {
+bool IsNotZero(const double val, const double eps = kEps)  {
   return fabs(val) > eps;
 }
 
@@ -87,10 +87,17 @@ sparse_vector_t::sparse_vector_t(const vector_t<double>& v, const double eps) : 
   n_ = v.get_size();
   int size{0};
   for (int counter = 0; counter < v.get_size(); ++counter) {
-    if (IsNotZero(v[counter], eps) == true) {
-      pair_t<double> pair{v[counter], size};
-      pv_[counter] = pair;
+    if (fabs(v[counter]) > eps) {
       ++size;
+    }
+  }
+  pv_.resize(size);
+  int counter2{0};
+  for (int counter = 0; counter < v.get_size(); ++counter) {
+    if (fabs(v[counter]) > eps) {
+      pair_t<double> pair{v[counter], counter};
+      pv_[counter2] = pair;
+      counter2++;
     }
   }
   nz_ = size;

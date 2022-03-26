@@ -93,7 +93,9 @@ std::ostream& operator<<(std::ostream& os, const Polynomial& p) {
  */
 double Polynomial::Eval(const double x) const {
   double result{0.0};
-  // poner el código aquí
+  for (int counter = 0; counter < get_size(); counter++) {
+    result = result + (at(counter) * pow(x, counter));
+  }
   return result;
 }
 
@@ -161,7 +163,9 @@ std::ostream& operator<<(std::ostream& os, const SparsePolynomial& p) {
  */
 double SparsePolynomial::Eval(const double x) const {
   double result{0.0};
-  // poner el código aquí
+  for (int counter = 0; counter < get_nz(); counter++) {
+    result = result + (at(counter).get_val() * pow(x, at(counter).get_inx()));
+  }
   return result;
 }
 
