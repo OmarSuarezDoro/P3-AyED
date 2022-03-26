@@ -109,7 +109,12 @@ double Polynomial::Eval(const double x) const {
  */
 bool Polynomial::IsEqual(const Polynomial& pol, const double eps) const {
   bool differents = false;
-  // poner el código aquí
+  if(fabs(get_size() - pol.get_size()) > eps) {return differents;}
+  for (int counter = 0; counter < get_size(); ++counter) {
+    if (get_val(counter) != pol.get_val(counter)) {
+      differents = true;
+    }
+  }
   return !differents;
 }
 
@@ -178,7 +183,12 @@ double SparsePolynomial::Eval(const double x) const {
  */
 bool SparsePolynomial::IsEqual(const SparsePolynomial& spol, const double eps) const {
   bool differents = false;
-  // poner el código aquí
+  if(fabs(get_nz() - spol.get_nz()) > eps) {return differents;}
+  for (int counter = 0; counter < get_nz(); ++counter) {
+    if (get_pv().at(counter).get_val() != spol.get_pv().at(counter).get_val()) {
+      differents = true;
+    }
+  }
   return !differents;
 }
 
