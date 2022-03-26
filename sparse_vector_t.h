@@ -56,7 +56,6 @@ class sparse_vector_t {
   pair_vector_t pv_;  /// values + index
   int nz_;            /// Size of the sparse vector
   int n_;             /// Size of the original vetor
-  
 };
 
 /**
@@ -85,9 +84,18 @@ sparse_vector_t::sparse_vector_t(const int n) : pv_(n), nz_(0), n_(n) {}
  * @param v : It is the vector that will be passed
  * @param eps : It is the presition.
  */
-sparse_vector_t::sparse_vector_t(const vector_t<double>& v, const double eps)
-    : pv_(), nz_(0), n_(0) {
-  // poner el código aquí
+
+sparse_vector_t::sparse_vector_t(const vector_t<double>& v, const double eps) : pv_(), nz_(0), n_(0) {
+  n_ = v.get_size();
+  int size{0};
+  for (int counter = 0; counter < v.get_size(); ++counter) {
+    if (IsNotZero(v[counter], eps) == true) {
+      pair_t<double> pair{v[counter], size};
+      pv_[counter] = pair;
+      ++size;
+    }
+  }
+  nz_ = size;
 }
 
 /**

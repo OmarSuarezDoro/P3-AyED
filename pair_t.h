@@ -121,8 +121,7 @@ template<class T> std::ostream& pair_t<T>::write(std::ostream& os) const {
  * @param os : Is the output stream.
  * @param p : It is the pair that will be printed on the screen.
  */
-template<class T> std::ostream& operator<<(std::ostream& os,
-					   const pair_t<T>& p) {
+template<class T> std::ostream& operator<<(std::ostream& os, const pair_t<T>& p) {
   p.write(os);
   return os;
 }
