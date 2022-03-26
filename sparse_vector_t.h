@@ -50,8 +50,6 @@ class sparse_vector_t {
   /// Input / Output
   void write(std::ostream& = std::cout) const;
   bool IsNotZero(const double, const double = kEps) const;
-  
-
  private:
   pair_vector_t pv_;  /// values + index
   int nz_;            /// Size of the sparse vector
@@ -65,7 +63,7 @@ class sparse_vector_t {
  * @return true 
  * @return false 
  */
-bool IsNotZero(const double val, const double eps = kEps) {
+bool sparse_vector_t::IsNotZero(const double val, const double eps = kEps) const {
   return fabs(val) > eps;
 }
 
@@ -84,6 +82,7 @@ sparse_vector_t::sparse_vector_t(const int n) : pv_(n), nz_(0), n_(n) {}
  * @param v : It is the vector that will be passed
  * @param eps : It is the presition.
  */
+
 sparse_vector_t::sparse_vector_t(const vector_t<double>& v, const double eps) : pv_(), nz_(0), n_(0) {
   n_ = v.get_size();
   int size{0};
