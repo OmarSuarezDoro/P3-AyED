@@ -233,7 +233,14 @@ bool SparsePolynomial::IsEqual(const SparsePolynomial& spol, const double eps) c
 bool SparsePolynomial::IsEqual(const Polynomial& pol, const double eps) const {
   bool differents = false;
   for (int counter = 0; counter < pol.get_size(); ++counter) {
-    
+    for (int counter2 = 0; counter2 < get_nz(); ++counter2) {
+      if (at(counter2).get_inx() == counter) {
+        if (at(counter2).get_val() != pol.get_val(counter)) {
+          differents = true;
+          break;
+        }
+      } 
+    }
   }
   return !differents;
 }
