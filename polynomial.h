@@ -109,9 +109,6 @@ double Polynomial::Eval(const double x) const {
  */
 bool Polynomial::IsEqual(const Polynomial& pol, const double eps) const {
   bool differents = false;
-  int size{0};
-  int size2{0};
-  int bigger{0};
   int sum{0};
   
   if (get_size() > pol.get_size()) {
@@ -217,7 +214,7 @@ bool SparsePolynomial::IsEqual(const SparsePolynomial& spol, const double eps) c
   bool differents = false;
   if(fabs(get_nz() - spol.get_nz()) > eps) {return differents;}
   for (int counter = 0; counter < get_nz(); ++counter) {
-    if (get_pv().at(counter).get_val() != spol.get_pv().at(counter).get_val()) {
+    if (at(counter).get_val() != spol.at(counter).get_val()) {
       differents = true;
     }
   }
@@ -235,7 +232,9 @@ bool SparsePolynomial::IsEqual(const SparsePolynomial& spol, const double eps) c
  */
 bool SparsePolynomial::IsEqual(const Polynomial& pol, const double eps) const {
   bool differents = false;
-  // poner el código aquí
+  for (int counter = 0; counter < pol.get_size(); ++counter) {
+    
+  }
   return !differents;
 }
 

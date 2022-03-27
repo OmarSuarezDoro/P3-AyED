@@ -41,7 +41,6 @@ class sparse_vector_t {
   /// getters
   int get_nz(void) const;
   int get_n(void) const;
-  pair_vector_t get_pv(void) const {return pv_;};
   /// Getters-Setters
   pair_double_t& at(const int);
   pair_double_t& operator[](const int);
