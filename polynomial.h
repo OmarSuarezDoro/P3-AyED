@@ -109,13 +109,45 @@ double Polynomial::Eval(const double x) const {
  */
 bool Polynomial::IsEqual(const Polynomial& pol, const double eps) const {
   bool differents = false;
-  if(fabs(get_size() - pol.get_size()) > eps) {return differents;}
-  for (int counter = 0; counter < get_size(); ++counter) {
-    if (get_val(counter) != pol.get_val(counter)) {
-      differents = true;
+  int size{0};
+  int size2{0};
+  int bigger{0};
+  int sum{0};
+  
+  if (get_size() > pol.get_size()) {
+    for (int counter = 0; counter < pol.get_size(); counter++) {
+      if (get_val(counter) != pol.get_val(counter)) {
+        differents = true;
+      }
     }
+
+    for (int counter2 = pol.get_size(); counter2 < get_size();++counter2) {
+      sum += at(counter2);
+      if (sum != 0) {
+        differents = true;
+        break;
+      }    
+    }
+    return !differents;
   }
-  return !differents;
+  else {
+    for (int counter = 0; counter < get_size(); counter++) {
+      if (get_val(counter) != pol.get_val(counter)) {
+        differents = true;
+      }
+    }
+
+    for (int counter2 = get_size(); counter2 < pol.get_size();++counter2) {
+      sum += pol.at(counter2);
+      if (sum != 0) {
+        differents = true;
+        break;
+      }    
+    }
+    return !differents;
+  }
+  
+
 }
 
 /**
