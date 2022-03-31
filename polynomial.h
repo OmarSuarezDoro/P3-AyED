@@ -50,6 +50,7 @@ class SparsePolynomial : public sparse_vector_t {
   double Eval(const double) const;
   bool IsEqual(const SparsePolynomial&, const double = kEps) const;
   bool IsEqual(const Polynomial&, const double = kEps) const;
+  SparsePolynomial Converter(const Polynomial& pol) const;
 };
 
 /**
@@ -221,6 +222,17 @@ bool SparsePolynomial::IsEqual(const SparsePolynomial& spol, const double eps) c
   return !differents;
 }
 
+
+SparsePolynomial SparsePolynomial::Converter(const Polynomial& pol) const {
+  SparsePolynomial pol2 {pol};
+  return pol2;
+}
+
+
+
+
+
+
 // Comparación si son iguales dos polinomios representados por
 // vector disperso y vector denso
 /**
@@ -242,6 +254,7 @@ bool SparsePolynomial::IsEqual(const Polynomial& pol, const double eps) const {
       } 
     }
   }
+  Converter(pol).IsEqual(*this) ? differents = false : differents = true;
   return !differents;
 }
 
