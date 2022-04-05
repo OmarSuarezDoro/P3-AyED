@@ -33,7 +33,8 @@ class Polynomial : public vector_t<double> {
   double Eval(const double) const;
   bool IsEqual(const Polynomial&, const double = kEps) const;
   Polynomial add(const Polynomial& pol);
- };
+  Polynomial fill(int pol_size) const;
+};
 
 
 // Clase para polinomios basados en vectores dispersos
@@ -260,21 +261,28 @@ bool SparsePolynomial::IsEqual(const Polynomial& pol, const double eps) const {
 }
 
 
-Polynomial Polynomial::add(const Polynomial& pol) {
-  Polynomial result;
-  if (get_size() > pol.get_size()) {
-    result = *this;
-    for (int counter = 0; counter < get_size(); ++counter) {
-      result.at(counter) += pol.at(counter);
-    }
-  } else {
-    result = pol;
-    for (int counter = 0; counter < get_size(); ++counter) {
-      result.at(counter) += at(counter);
-    }
+
+Polynomial Polynomial::fill(int pol_size) const {
+  Polynomial result{*this};
+  result.set_size(get_size());
+  for (int counter = get_size(); counter < pol_size; ++counter) {
+    result.at(counter) = 0;
   }
   return result;
 }
+
+Polynomial Polynomial::add(const Polynomial& pol) {
+  Polynomial result;
+  int size{0};
+  get_size() > pol.get_size() ? size = get_size(), pol.fill(get_size()) : size = pol.get_size(), fill(get_size());
+  result.resize(size);
+  for (int counter = 0; counter < get_size(); ++counter) {
+    result.at(counter) = at(counter) - pol.at(counter);
+  }
+  return result;
+}
+
+
 
 
 

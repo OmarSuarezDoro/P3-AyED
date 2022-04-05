@@ -88,10 +88,5 @@ int main() {
   std::cout << "sp2 == p3? " << (sp2.IsEqual(p3) ? "true" : "false") << std::endl;
   std::cout << "sp3 == p2? " << (sp3.IsEqual(p2) ? "true" : "false") << std::endl;
   std::cout << std::endl;
-  
-  std::cout << "COSAS QUE ESTOY OPROBANDO" << std::endl << std::endl;
-  std::cout << "p1= " << p1;
-  std::cout << "p2= " << p2;
-  std::cout << "p1 + p2 = " << p1.add(p2);
   return 0;
 }

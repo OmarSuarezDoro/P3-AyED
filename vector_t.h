@@ -31,6 +31,7 @@ template<class T> class vector_t {
   int get_size(void) const;
   /// Setters
   void set_val(const int, const T);
+  void set_size(const int s) {size_ = s;};
   /// Getters-Setters
   T& at(const int);
   T& operator[](const int);
