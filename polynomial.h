@@ -32,6 +32,7 @@ class Polynomial : public vector_t<double> {
   /// Operations
   double Eval(const double) const;
   bool IsEqual(const Polynomial&, const double = kEps) const;
+  Polynomial add(const Polynomial& pol);
  };
 
 
@@ -257,6 +258,24 @@ bool SparsePolynomial::IsEqual(const Polynomial& pol, const double eps) const {
   Converter(pol).IsEqual(*this) ? differents = false : differents = true;
   return !differents;
 }
+
+
+Polynomial Polynomial::add(const Polynomial& pol) {
+  Polynomial result;
+  if (get_size() > pol.get_size()) {
+    result = *this;
+    for (int counter = 0; counter < get_size(); ++counter) {
+      result.at(counter) += pol.at(counter);
+    }
+  } else {
+    result = pol;
+    for (int counter = 0; counter < get_size(); ++counter) {
+      result.at(counter) += at(counter);
+    }
+  }
+  return result;
+}
+
 
 
 #endif  // POLYNOMIAL_H_
