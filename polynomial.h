@@ -34,6 +34,7 @@ class Polynomial : public vector_t<double> {
   bool IsEqual(const Polynomial&, const double = kEps) const;
   Polynomial add(const Polynomial& pol);
   Polynomial fill(int pol_size) const;
+  void Write0s() const;
 };
 
 
@@ -53,6 +54,7 @@ class SparsePolynomial : public sparse_vector_t {
   bool IsEqual(const SparsePolynomial&, const double = kEps) const;
   bool IsEqual(const Polynomial&, const double = kEps) const;
   SparsePolynomial Converter(const Polynomial& pol) const;
+  Polynomial Converter() const;
 };
 
 /**
@@ -229,7 +231,23 @@ SparsePolynomial SparsePolynomial::Converter(const Polynomial& pol) const {
   SparsePolynomial pol2 {pol};
   return pol2;
 }
-
+/**
+ * @brief This method allow user to convert a sparse polynomial into a polynomial
+ * @return Polynomial 
+ */
+Polynomial SparsePolynomial::Converter() const {
+  Polynomial pol(get_n());
+  for (int counter = 0; counter < get_n();++counter) {
+    for (int counter2 = 0; counter2 < get_nz();++counter2) {
+      if (counter == at(counter2).get_inx()) {
+        pol.at(counter) = at(counter2).get_val();
+      } else {
+        pol.at(counter) += 0;
+      }
+    }
+  } 
+  return pol;
+}
 
 
 
@@ -282,8 +300,18 @@ Polynomial Polynomial::add(const Polynomial& pol) {
   return result;
 }
 
+void Polynomial::Write0s() const {
+  int pos{0};
+  for (int  counter = 0; counter < get_size(); ++counter) {
+    get_val(counter) == 0 ? pos = counter : pos = pos;
+  }
 
-
+  for (int counter = 0; counter < get_size(); ++counter) {
+    (get_val(counter) == 0) ? std::cout << "0x^" << counter : std::cout << "";
+    (get_val(counter) == 0 && counter != pos) ? std::cout << " + " : std::cout << "";
+  }
+  std::cout << "\n";
+}
 
 
 #endif  // POLYNOMIAL_H_

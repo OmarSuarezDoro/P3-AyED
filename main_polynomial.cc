@@ -88,5 +88,11 @@ int main() {
   std::cout << "sp2 == p3? " << (sp2.IsEqual(p3) ? "true" : "false") << std::endl;
   std::cout << "sp3 == p2? " << (sp3.IsEqual(p2) ? "true" : "false") << std::endl;
   std::cout << std::endl;
+
+
+  std::cout << "COSAS RANCIAS" << std::endl << std::endl;
+  std::cout << sp1;
+  std::cout << sp1.Converter();
+  sp1.Converter().Write0s();
   return 0;
 }
