@@ -35,6 +35,7 @@ class Polynomial : public vector_t<double> {
   Polynomial add(const Polynomial& pol);
   Polynomial fill(int pol_size) const;
   void Write0s() const;
+  void WriteChain() const;
 };
 
 
@@ -312,6 +313,19 @@ void Polynomial::Write0s() const {
   }
   std::cout << "\n";
 }
+
+void Polynomial::WriteChain() const {
+  for (int counter = 1; counter < get_size(); ++counter) {
+    if (at(counter - 1) != 0 && at(counter) != 0) {
+      std::cout << get_val(counter - 1) << "x^" << counter - 1 << "<--->";
+      std::cout << get_val(counter) << "x^" << counter << std::endl;
+
+    }
+  }
+}
+
+
+
 
 
 #endif  // POLYNOMIAL_H_

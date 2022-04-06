@@ -94,5 +94,10 @@ int main() {
   std::cout << sp1;
   std::cout << sp1.Converter();
   sp1.Converter().Write0s();
+
+  std::cout << p3;
+  p3.WriteChain();
+  std::cout << "\n"; 
+
   return 0;
 }
