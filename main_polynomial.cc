@@ -90,7 +90,8 @@ int main() {
   std::cout << std::endl;
 
 
-  std::cout << "COSAS RANCIAS" << std::endl << std::endl;
+  std::cout << "Modificación" << std::endl << std::endl;
+  /*
   std::cout << sp1;
   std::cout << sp1.Converter();
   sp1.Converter().Write0s();
@@ -98,6 +99,6 @@ int main() {
   std::cout << p3;
   p3.WriteChain();
   std::cout << "\n"; 
-
+*/
   return 0;
 }

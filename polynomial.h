@@ -251,9 +251,6 @@ Polynomial SparsePolynomial::Converter() const {
 }
 
 
-
-
-
 // Comparación si son iguales dos polinomios representados por
 // vector disperso y vector denso
 /**
@@ -280,7 +277,9 @@ bool SparsePolynomial::IsEqual(const Polynomial& pol, const double eps) const {
 }
 
 
-
+/**
+ * @brief This method fill with 0s
+ */
 Polynomial Polynomial::fill(int pol_size) const {
   Polynomial result{*this};
   result.set_size(get_size());
@@ -290,6 +289,11 @@ Polynomial Polynomial::fill(int pol_size) const {
   return result;
 }
 
+/**
+ * @brief This method allow user to sum two polynomials
+ * @param pol : Is one of the polynomials
+ * @return : The resulted polynomial
+ */
 Polynomial Polynomial::add(const Polynomial& pol) {
   Polynomial result;
   int size{0};
@@ -301,6 +305,10 @@ Polynomial Polynomial::add(const Polynomial& pol) {
   return result;
 }
 
+
+/**
+ * @brief This method allow user to print 0s of a polynomial in screen
+ */
 void Polynomial::Write0s() const {
   int pos{0};
   for (int  counter = 0; counter < get_size(); ++counter) {
@@ -314,6 +322,9 @@ void Polynomial::Write0s() const {
   std::cout << "\n";
 }
 
+/**
+ * @brief This method allow user to print the chains that are in a polynomial
+ */
 void Polynomial::WriteChain() const {
   for (int counter = 1; counter < get_size(); ++counter) {
     if (at(counter - 1) != 0 && at(counter) != 0) {
