@@ -56,6 +56,7 @@ class SparsePolynomial : public sparse_vector_t {
   bool IsEqual(const Polynomial&, const double = kEps) const;
   SparsePolynomial Converter(const Polynomial& pol) const;
   Polynomial Converter() const;
+  void Modify(double value) const;
 };
 
 /**
@@ -337,6 +338,21 @@ void Polynomial::WriteChain() const {
 
 
 
+void SparsePolynomial::Modify(double value) const {
+  bool first{true};
+  for (int counter = 0; counter < get_nz(); ++counter) {
+    
+    if (at(counter).get_val() != 0 && at(counter).get_val() < value) {
+      if (first == true) {
+        std::cout << counter;
+        first = false;
+      } else {
+        std::cout << ", " << counter; 
+      }
+    }
+  }
+  std::cout << '\n';
+}
 
 
 #endif  // POLYNOMIAL_H_
